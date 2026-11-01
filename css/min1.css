@@ -1,0 +1,707 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantata+One&family=Chango&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+html {
+  scroll-behavior: smooth; /* 平滑滾動動效 */
+}
+
+/* 套用到整個頁面 */
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh; /* 確保全螢幕高度都能點擊生效 */
+  font-size: 1.2rem;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+
+  font-family: "Staatliches", sans-serif;
+}
+
+/* ===== 鼠標更換效果 ===== */
+html, body, * {
+  cursor: url('../images/eye-01.svg') 16 16, auto !important;
+}
+
+html:active, body:active, *:active {
+  cursor: url('../images/eye-02.svg') 16 16, auto !important;
+}
+/* ============================== */
+
+/* 平常狀態：只有圖片變黑白 */
+img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+/* 滑鼠碰觸或點擊時：圖片恢復彩色 */
+img:hover,
+img:active {
+  filter: grayscale(0%);
+}
+
+::selection{
+    background: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 1);
+}
+
+a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display: inline-block;
+}
+
+
+
+/*header*/
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: auto;
+    z-index: 200000;
+    
+    background: linear-gradient(
+     to bottom,
+     rgba(255, 255, 255, 0.845),
+     rgba(255, 213, 0, 0)
+    )
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px; /* 上下 0，左右各退開 50px */
+  box-sizing: border-box; /* 確保 padding 不會把容器寬度撐爆 */
+}
+
+/*logo*/
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+
+  /* 1. 字體放大 */
+  font-size: 2.2rem;       /* 依視覺需求調整大小，如 2rem ~ 3rem */
+  font-weight: 900;        /* 粗細程度 */
+
+  /* 2. 單獨指定字形 */
+  font-family: "Staatliches", sans-serif; /* 替換為你想單獨套用的字型名稱 */
+  
+  /* 3. 顏色與間距微調（配合你的導覽列風格） */
+  color:  #000000;
+  letter-spacing: 2px;     /* 字元間距，讓標題更有設計感 */
+}
+
+/*nav*/
+nav{
+    /*float: right;*/
+    flex:1;
+    text-align: right;
+}
+
+nav a{
+    padding: 50px;
+    font-weight: bold;
+
+    /* ▼ 獨立設定 nav 文字顏色與樣式（不影響全域和其他連結） ▼ */
+  color: #000000;             
+  text-decoration: none;       /* 平常無底線 */
+  display: inline-block;       /* 確保 padding 與排版穩定 */
+}
+
+nav a:hover{
+text-decoration: none;       /* 移上去時不要出現底線 */
+  color: #0000008f;
+}
+
+/*hero*/
+.hero{
+    position: relative;   
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+}
+
+.hero img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+.hero h1{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    font-size: 100px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: rgb(255, 255, 255);
+}
+
+.hero p{
+    position: absolute;
+    top: 52%;
+    left: 6%;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgb(255, 255, 255);
+}
+
+.inside-hero {
+  position: relative;      /* 必須加上這行，絕對定位才不會飄去網頁頂部！ */
+  height: 250px;           /* 高度要給足夠容納兩行字 */
+}
+
+.inside-hero h1 {
+  position: absolute;
+  top: 80px;               /* 改用像素向下移，離開導覽列 */
+  left: 5%;
+    font-size: 60px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: rgb(0, 0, 0);
+}
+
+.inside-hero p {
+  position: absolute;
+  top: 190px;              /* 要比 h1 的頂部多出至少 70~90px，才不會跟標題相撞重疊 */
+  left: 6%;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgb(0, 0, 0);
+}
+
+/* EYE PAGE - 瀑布流畫廊 (GALLERY) */
+
+/* 1. 外層容器設定多欄 (電腦版 3 欄或 4 欄更像 Pinterest 瀑布流) */
+.gallery {
+  display: block !important;          /* 覆蓋掉全域 section 的 flex，瀑布流必備 */
+  columns: 3;                         /* 欄數：可設為 3 或 4 */
+  column-gap: 20px;                   /* 左右各欄間距 */
+  width: 85%;
+  margin: 40px auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. 單個項目：防止被欄位切斷 */
+.gallery-item {
+  display: inline-block;              /* 確保容器穩定折行 */
+  width: 100%;                        /* 填滿單欄寬度 */
+  margin-bottom: 20px;                /* 上下圖片之間的間距 */
+  break-inside: avoid;                /* 關鍵：避免圖片跨欄被截斷 */
+  overflow: hidden;
+  border-radius: 8px;                 /* 圓角弧度 */
+  background: #ffffff;                /* 圖片載入前的底色 */
+}
+
+/* 3. 圖片本身自適應原圖高寬比 */
+.gallery-item img {
+  width: 100%;
+  height: auto;                       /* 依原圖高度自然伸縮，形成高低錯落的瀑布流 */
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+/* 4. 滑鼠懸停效果 */
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.04);
+}
+
+
+/*marquee*/
+.marquee{
+    width: 100%;
+    overflow: hidden;
+    background: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 1);
+    padding: 10px 0;
+}
+
+.marquee-track{
+    display: flex;
+    width: max-content;
+    animation: marquee 50s linear infinite;
+}
+
+@keyframes marquee{
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/*section*/
+section{
+    display:flex;
+    flex-wrap: wrap;
+    gap:10px;
+
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 7px;
+}
+
+section h1{
+    font-size: 40px;
+    font-weight: 800;
+    flex:0 0 100%;
+    color:rgb(0, 0, 0);
+    text-align: center;
+    letter-spacing: 2px;
+    
+}
+
+/*card*/
+.card{
+	flex: 0 0 calc((100% - 10px *3)/4);
+	text-align:center;
+	cursor:pointer;
+}
+
+.card img{
+	width:80%;
+	border-radius:50%;
+	border:solid 0px rgb(0, 0, 0);
+    
+	-ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Safari */
+    transform: rotate(0deg); /* Standard syntax */
+	
+	transition: transform 1.5s;
+	-webkit-transition: transform 1.5s;
+}
+
+.card:hover img{
+	-ms-transform: rotate(-20deg); /* IE 9 */
+    -webkit-transform: rotate(-20deg); /* Safari */
+    transform: rotate(-20deg); /* Standard syntax */
+}
+
+#moments h1 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: -30px;
+  margin-bottom: 20px;
+}
+
+/*article*/
+article{
+	width:100%;
+    height: 500px;
+	margin:auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+article:hover{
+	cursor:pointer;	
+}
+
+
+
+.a_left{
+    position: relative;
+	float:left;
+	width:50%;
+    height:90%;
+}
+
+.a_left img{
+	float:left;
+	width:100%;
+    height:100%;
+	object-fit:cover;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.a_right{
+	float:left;
+	width:50%;
+    height:90%;
+	padding: 4%;
+	box-sizing:border-box;
+	background:rgba(255, 255, 255, 1);
+	color:rgb(0, 0, 0);
+	text-align:left;
+    line-height: 2rem;
+    transition: color 0.5s, background 0.5s;
+	-webkit-transition: color 0.5s, background 0.5s; /*前綴詞*/
+    border-radius: 0 8px 8px 0;
+	
+	transition-timing-function:linear;
+	-webkit-transition-timing-function: linear;/* Safari */
+
+}
+
+
+.moreb{
+  
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	
+	background:rgba(255, 213, 0, 1);
+	padding:30px;
+	color: rgba(255, 255, 255, 1);
+    opacity:0;
+	transition: opacity 0.7s;
+	-webkit-transition: opacity 0.7s;/*前綴詞*/
+    border-radius: 7px;
+	
+	transition-timing-function: ease-in-out;
+	-webkit-transition-timing-function: ease-in-out;/* Safari */
+
+}
+
+article:hover .moreb{
+	opacity:1;
+}
+
+
+article:hover .a_right{
+	background:rgb(255, 246, 231);
+    color:rgba(255, 213, 0, 1);
+}
+
+/* 將 closing 區塊改為直向排列並完全水平置中 */
+.closing {
+  display: flex !important;
+  flex-direction: column !important; /* 強制由上到下垂直排列 */
+  align-items: center !important;    /* 所有內容水平置中 */
+  text-align: center !important;     /* 文字本體水平置中 */
+  width: 100% !important;
+  margin: 60px auto 40px auto !important; /* 上下留白，依視覺微調 */
+}
+
+/* 標題樣式與間距 */
+.closing h2 {
+  font-size: 30px;
+  font-weight: 600;
+  margin: 0 0 12px 0 !important;
+}
+
+
+/*footer*/
+footer{
+    clear: both;
+    width: 100%;
+    padding: 10px 0px;
+    text-align: center;
+
+    font-size: 18px;
+
+    color:rgb(0, 0, 0);
+    margin-top: -20px;
+}
+
+footer a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+footer a:hover {
+    color: rgba(255, 213, 0, 1);
+    opacity: 0.7; /* 碰過去稍微半透明，維持黃色 */
+}
+
+
+
+/*for tablets*/
+@media only screen and (max-width: 1200px) {
+}
+
+
+/*for mobile*/
+@media only screen and (max-width: 768px) {
+
+  body{
+    font-size: 1.3rem;
+}
+
+/*menu*/
+.menu{
+    margin:20px auto;
+    flex-direction: column;
+}
+
+/*logo*/
+.logo {
+  text-align: center;
+  margin-top: 30px;       /* ▼ 加上這行：數值越大，logo 就會越往下移 ▼ */
+}
+
+.logo img {
+  width: 30%;
+  margin: auto;
+  display: block;         /* 確保 margin: auto 置中能完全生效 */
+}
+
+nav {
+    width: 100% !important;
+    text-align: center !important;  /* 消除電腦版的 text-align: right */
+    display: flex !important;
+    justify-content: center !important; /* 使用 flex 水平完全居中 */
+    align-items: center;
+    gap: 16px;                          /* 用 gap 控制三個選項之間的距離，最均勻 */
+    padding: 0px 0;
+    margin: 0 auto;
+    float: none !important;
+  }
+
+  /* 3. 重設 nav 裡面的 a 標籤 */
+  nav a {
+    display: inline-block;
+    padding: 6px 40px !important;       /* 縮小手機版 padding，避免把選項擠出螢幕 */
+    font-size: 15px;
+    color: #000000;
+    text-decoration: none;
+  
+  }
+
+  nav a:hover{
+  text-decoration: none;       /* 移上去時不要出現底線 */
+  color: #0000008f;
+}
+
+  /* 調整 Hero 容器高度 */
+  .hero {
+    height: 70vh;             /* 適當拉高，留出足夠垂直空間放文字 */
+    position: relative;
+  }
+
+  /* 將 h1 往下拉到 nav 下方（避開頂部的 About/Product/Contact） */
+  .hero h1 {
+    position: absolute;
+    top: 45%;                 /* 往下推，原本是 30%~40%，改成 60% 就能避開 nav */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+
+    font-size: 38px;          /* 適合手機閱讀的大小 */
+    line-height: 1.35;        /* 換行後的行距，避免兩行字撞在一起 */
+    color: #ffffff;
+
+    white-space: normal;      /* 允許 HTML 的 <br> 正常換行 */
+    margin: 0;
+  }
+
+  /* 英文副標題跟隨在中文下方 */
+  .hero p {
+    position: absolute;
+    top: 90%;                 /* 排在 h1 換行後的正下方 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 1.5px;
+    color: #FFFFFF;
+   
+    margin: 0;
+  }
+
+.inside-hero {
+    height: auto !important;          /* 解除寫死高度，避免大片空白 */
+    padding-top: 160px !important;     /* 閃過頂部固定導覽列 */
+    padding-bottom: 10px !important;  /* 關鍵：大幅縮減底部距離 */
+    margin-bottom: 0 !important;
+  }
+
+.inside-hero h1 {
+  position: static;            /* 取消絕對定位，避免高度被撐大空出大截留白 */
+  transform: none;             /* 取消 translate */
+  width: 90%;
+  margin: 0 auto 8px auto;     /* 水平置中，底部只留 8px 給 p */
+  text-align: center;
+  font-size: 26px;             /* 手機版建議 24px ~ 28px，避免過大換行破碎 */
+  line-height: 1.25;
+  color: #000000;
+  white-space: normal;
+}
+
+.inside-hero p {
+  position: static;            /* 取消絕對定位 */
+  transform: none;             /* 取消 translate */
+  width: 85%;
+  margin: 0 auto 0 auto;       /* 水平置中，底部間距歸零緊貼下方 */
+  text-align: center;
+  font-size: 13px;             /* 適合手機閱讀的大小 */
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+/* 1. 確保卡片的父層容器允許換行，並設定間距 */
+section {
+  display: flex !important;
+  flex-wrap: wrap !important;     /* 關鍵：必須允許折行，兩個卡片才能並排 */
+  justify-content: space-between; /* 左右兩側對齊 */
+  gap: 15px;                      /* 兩張卡片之間的間隙 */
+  box-sizing: border-box;
+}
+
+/* 1. 上面的「— WHAT DO I NOTICE? —」 */
+  section h1 {
+    font-size: 20px !important;  
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;       
+  }
+
+
+/* 2. 將每張卡片寬度設為接近 50%（扣除間隙） */
+.card {
+  /* 一行排 2 個：用 calc 扣掉間隙後除以 2，或直接用 47%~48% */
+  flex: 0 0 calc((100% - 15px) / 2) !important;
+  max-width: calc((100% - 15px) / 2);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 3. 確保裡面的圖片與文字不會撐爆卡片寬度 */
+.card img {
+  width: 90%;                    /* 圖片維持適當大小 */
+  height: auto;
+  aspect-ratio: 1 / 1;           /* 保持正圓形比例 */
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.card h2 {
+  font-size: 18px;               /* 手機版一行兩個時，適度微調字體避免折行過於凌亂 */
+}
+
+.card p {
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+ /* 1. 確保外層 section 寬度撐滿並居中 */
+#moments {
+  width: 100% !important;
+  text-align: center !important;
+  display: block !important;     /* 避免被 section 的 flex 影響對齊 */
+  margin: 0 auto;
+}
+
+/* 2. 標題加上 text-align: center 與 width: 100% */
+#moments h1 {
+  width: 100% !important;        /* 關鍵：撐滿整行寬度 */
+  text-align: center !important;  /* 關鍵：文字水平置中（原本漏掉了這行） */
+  font-size: 20px !important;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+/* 1. 外層卡片：高度完全隨內容自適應 */
+article {
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;          /* 隨內容高度貼合，絕不留多餘空白 */
+  min-height: 0 !important;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #F5EADB;        /* 底色直接給卡片本身，避免斷層 */
+}
+
+/* 2. 上方圖片區：完整顯示照片比例，不裁切 */
+.a_left {
+  width: 100% !important;
+  height: auto !important;          /* 解除固定高度 */
+}
+
+.a_left img {
+  width: 100% !important;
+  height: auto !important;          /* 讓圖片照原圖比例完整展開，不裁頭裁尾 */
+  object-fit: contain !important;   /* 完整呈現 */
+  display: block;                   /* 消除圖片下方微小空隙 */
+  border-radius: 24px 24px 0 0 !important; /* 順序：左上 24px、右上 24px、右下 0、左下 0 */
+}
+
+/* 3. 下方文字區：收緊底部 padding，消除下方多餘縫隙 */
+.a_right {
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 22px 22px 20px 22px !important; /* 關鍵：底部只留 16px~18px 舒適邊界 */
+}
+
+.a_right h2 {
+  font-size: 1.35rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.a_right p {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin-bottom: 0 !important;      /* 關鍵：清除最後一行文字自帶的底部外距 */
+}
+
+/* 1. 消除上方畫廊底部的 padding 與 margin */
+  .gallery {
+    margin-bottom: 0 !important;      /* 清除瀑布流區塊下方的外邊距 */
+    padding-bottom: 0 !important;     /* 清除瀑布流區塊下方的內邊距 */
+  }
+
+  /* 2. 消除照片項目自帶的下邊距 */
+  .gallery-item {
+    margin-bottom: 10px !important;   /* 若原本是 24px，收緊為 10px */
+  }
+
+/* 1. 縮短與上方照片、下方版權文字的距離 */
+  .closing {
+    margin: 20px auto 10px auto !important; /* 頂部距離從 60px 縮小到 20px */
+    padding: 0 10px !important;
+  }
+
+  /* 2. 縮小 h2 字體大小並強制單行置中 */
+  .closing h2 {
+    font-size: 16px !important;             /* 從 30px 縮小至 16px，剛好適配手機寬度 */
+    font-weight: 800 !important;
+    white-space: nowrap !important;         /* 關鍵：強制不折行，排成漂亮的一整行 */
+    letter-spacing: 0.5px !important;
+    color: #000000 !important;
+    text-align: center !important;
+    margin: 0 !important;                  /* 清除多餘的外距 */
+  }
+
+/*footer*/
+footer{
+    clear: both;
+    width: 100%;
+    padding: 10px 0px;
+    text-align: center;
+
+    font-size: 12px;
+
+    color:rgba(255, 213, 0, 1);
+    margin-top: 8px;
+}
+
+}
