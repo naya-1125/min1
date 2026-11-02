@@ -509,45 +509,53 @@ nav {
   color: #0000008f;
 }
 
-  /* 調整 Hero 容器高度 */
   .hero {
-    height: 70vh;             /* 適當拉高，留出足夠垂直空間放文字 */
+    height: 70vh;
     position: relative;
+    width: 100%;
+    overflow: hidden;
   }
 
-  /* 將 h1 往下拉到 nav 下方（避開頂部的 About/Product/Contact） */
   .hero h1 {
     position: absolute;
-    top: 45%;                 /* 往下推，原本是 30%~40%，改成 60% 就能避開 nav */
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 40%;
+    /* 改用 left: 0 + right: 0 + margin auto 置中，不與動畫衝突 */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transform: none; /* 清除衝突的 translate */
+
     width: 90%;
     text-align: center;
+    font-size: 40px;
+    line-height: 1.35;
+    letter-spacing: 1px;
+    white-space: normal;
 
-    font-size: 40px;          /* 適合手機閱讀的大小 */
-    line-height: 1.35;        /* 換行後的行距，避免兩行字撞在一起 */
-    color: #ffffff;
-
-    white-space: normal;      /* 允許 HTML 的 <br> 正常換行 */
-    margin: 0;
+    /* 手機版淡入動畫 */
+    opacity: 0;
+    animation: heroFadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
   }
 
-  /* 英文副標題跟隨在中文下方 */
   .hero p {
     position: absolute;
-    top: 90%;                 /* 排在 h1 換行後的正下方 */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    text-align: center;
+    top: auto;
+    bottom: 25px; /* 避開 top: 90% 爆版，改貼近底部 */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transform: none;
 
-    font-size: 18px;
-    font-weight: 550;
+    width: 85%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
     line-height: 1.4;
     letter-spacing: 1.2px;
-    color: #FFFFFF;
-   
-    margin: 0;
+
+    /* 手機版淡入動畫 */
+    opacity: 0;
+    animation: heroFadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
   }
 
 .inside-hero {
