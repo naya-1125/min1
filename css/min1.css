@@ -132,24 +132,48 @@ text-decoration: none;       /* 移上去時不要出現底線 */
     object-fit:cover;
 }
 
-.hero h1{
-    position: absolute;
-    top: 25%;
-    left: 5%;
-    font-size: 100px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    color: rgb(255, 255, 255);
+/* 1. 定義淡入動畫 */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* 初始稍微往上偏移 20px */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);    /* 回到原位 */
+  }
 }
 
-.hero p{
-    position: absolute;
-    top: 52%;
-    left: 6%;
-    font-size: 25px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: rgb(255, 255, 255);
+/* 2. 主標題 (DID YOU NOTICE?) */
+.hero h1 {
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  font-size: 100px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: rgb(255, 255, 255);
+
+  /* ▼▼▼ 加入淡入動畫 ▼▼▼ */
+  opacity: 0; /* 預設先隱藏，避免載入前閃爍 */
+  animation: heroFadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  /* 動畫名 | 持續 1s | 絲滑緩動 | 延遲 0.3s 播放 | 結束保持 opacity: 1 */
+}
+
+/* 3. 副標題 (Beautiful things...) */
+.hero p {
+  position: absolute;
+  top: 52%;
+  left: 6%;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgb(255, 255, 255);
+
+  /* ▼▼▼ 加入淡入動畫 ▼▼▼ */
+  opacity: 0; /* 預設先隱藏 */
+ animation: heroFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+  /* 延遲 0.8s 播放，主標題出來後才跟著浮現 */
 }
 
 .inside-hero {
@@ -165,6 +189,8 @@ text-decoration: none;       /* 移上去時不要出現底線 */
     font-weight: 900;
     letter-spacing: 2px;
     color: rgb(0, 0, 0);
+
+    animation: heroFadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
 .inside-hero p {
@@ -175,6 +201,8 @@ text-decoration: none;       /* 移上去時不要出現底線 */
     font-weight: 700;
     letter-spacing: 2px;
     color: rgb(0, 0, 0);
+
+    animation: heroFadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
 }
 
 /* EYE PAGE - 瀑布流畫廊 (GALLERY) */
@@ -224,6 +252,7 @@ text-decoration: none;       /* 移上去時不要出現底線 */
     background: rgb(0, 0, 0);
     color: rgba(255, 255, 255, 1);
     padding: 10px 0;
+    font-size: 20px;
 }
 
 .marquee-track{
@@ -393,7 +422,7 @@ article:hover .a_right{
 .closing h2 {
   font-size: 30px;
   font-weight: 600;
-  margin: 0 0 12px 0 !important;
+  margin: 0 0 10px 0 !important;
 }
 
 
@@ -404,7 +433,7 @@ footer{
     padding: 10px 0px;
     text-align: center;
 
-    font-size: 18px;
+    font-size: 15px;
 
     color:rgb(0, 0, 0);
     margin-top: -20px;
@@ -469,7 +498,7 @@ nav {
   nav a {
     display: inline-block;
     padding: 6px 40px !important;       /* 縮小手機版 padding，避免把選項擠出螢幕 */
-    font-size: 15px;
+    font-size: 18px;
     color: #000000;
     text-decoration: none;
   
@@ -495,7 +524,7 @@ nav {
     width: 90%;
     text-align: center;
 
-    font-size: 38px;          /* 適合手機閱讀的大小 */
+    font-size: 40px;          /* 適合手機閱讀的大小 */
     line-height: 1.35;        /* 換行後的行距，避免兩行字撞在一起 */
     color: #ffffff;
 
@@ -512,10 +541,10 @@ nav {
     width: 80%;
     text-align: center;
 
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 550;
     line-height: 1.4;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     color: #FFFFFF;
    
     margin: 0;
@@ -553,6 +582,12 @@ nav {
   color: #000000;
 }
 
+.marquee {
+    font-size: 13px; /* 從原本的 20px 縮小至 13px */
+    padding: 6px 0;  /* 同步調小上下內距，讓黑色橫條在手機上更細緻 */
+  }
+
+
 /* 1. 確保卡片的父層容器允許換行，並設定間距 */
 section {
   display: flex !important;
@@ -564,10 +599,10 @@ section {
 
 /* 1. 上面的「— WHAT DO I NOTICE? —」 */
   section h1 {
-    font-size: 20px !important;  
+    font-size: 22px !important;  
     letter-spacing: 1px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     white-space: nowrap;       
   }
 
@@ -595,7 +630,7 @@ section {
 }
 
 .card p {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.25;
 }
 
@@ -607,14 +642,15 @@ section {
   margin: 0 auto;
 }
 
-/* 2. 標題加上 text-align: center 與 width: 100% */
 #moments h1 {
-  width: 100% !important;        /* 關鍵：撐滿整行寬度 */
-  text-align: center !important;  /* 關鍵：文字水平置中（原本漏掉了這行） */
-  font-size: 20px !important;
+  width: 100vw !important;         /* 強制撐滿整個螢幕寬度 */
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* 鎖定全螢幕正中心 */
+  text-align: center !important;
+  font-size: 22px !important;
   letter-spacing: 1px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   white-space: nowrap;
 }
 
@@ -663,27 +699,27 @@ article {
   margin-bottom: 0 !important;      /* 關鍵：清除最後一行文字自帶的底部外距 */
 }
 
-/* 1. 消除上方畫廊底部的 padding 與 margin */
-  .gallery {
-    margin-bottom: 0 !important;      /* 清除瀑布流區塊下方的外邊距 */
-    padding-bottom: 0 !important;     /* 清除瀑布流區塊下方的內邊距 */
+.gallery {
+    columns: 2;               /* 照片從 3 欄改為 2 欄 */
+    column-gap: 13px;         /* 左右欄間距設為 13px */
+    width: 92%;               /* 手機版稍微放寬容器，讓版面更大方 */
+    margin: 20px auto;        /* 縮小上下外距 */
   }
 
-  /* 2. 消除照片項目自帶的下邊距 */
   .gallery-item {
-    margin-bottom: 10px !important;   /* 若原本是 24px，收緊為 10px */
+    margin-bottom: 13px;      /* 讓上下圖片之間的間距也同步為 13px */
   }
 
 /* 1. 縮短與上方照片、下方版權文字的距離 */
   .closing {
-    margin: 20px auto 10px auto !important; /* 頂部距離從 60px 縮小到 20px */
-    padding: 0 10px !important;
+    margin: 5px auto 8px auto !important; 
+    padding: 0 8px !important;
   }
 
   /* 2. 縮小 h2 字體大小並強制單行置中 */
   .closing h2 {
-    font-size: 16px !important;             /* 從 30px 縮小至 16px，剛好適配手機寬度 */
-    font-weight: 800 !important;
+    font-size: 18px !important;             /* 從 30px 縮小至 16px，剛好適配手機寬度 */
+    font-weight: 700 !important;
     white-space: nowrap !important;         /* 關鍵：強制不折行，排成漂亮的一整行 */
     letter-spacing: 0.5px !important;
     color: #000000 !important;
