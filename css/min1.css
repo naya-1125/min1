@@ -475,7 +475,7 @@ footer a:hover {
 /*logo*/
 .logo {
   text-align: center;
-  margin-top: 30px;       /* ▼ 加上這行：數值越大，logo 就會越往下移 ▼ */
+  margin-top: 30px;       /* 數值越大，logo 就會越往下移  */
 }
 
 .logo img {
