@@ -485,30 +485,32 @@ footer a:hover {
 }
 
 nav {
-    width: 100% !important;
-    text-align: center !important;  /* 消除電腦版的 text-align: right */
-    display: flex !important;
-    justify-content: center !important; /* 使用 flex 水平完全居中 */
-    align-items: center;
-    gap: 16px;                          /* 用 gap 控制三個選項之間的距離，最均勻 */
-    padding: 0px 0;
-    margin: 0 auto;
-    float: none !important;
-  }
+  width: 100% !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 12px !important;                 /* 控制兩個/三個按鈕之間的中間間距 */
+  padding: 0px 0;
+  margin: 0 auto;
+  float: none !important;
+}
 
-  /* 3. 重設 nav 裡面的 a 標籤 */
-  nav a {
-    display: inline-block;
-    padding: 6px 40px !important;       /* 縮小手機版 padding，避免把選項擠出螢幕 */
-    font-size: 18px;
-    color: #000000;
-    text-decoration: none;
-  
-  }
+/* 3. 重設手機版 nav 裡面的 a 標籤 */
+nav a {
+  display: inline-block;
+  width: 100px !important;             /* 核心：兩邊給予完全相同的固定寬度 */
+  text-align: center !important;       /* 核心：文字在各自 100px 框框內居中 */
+  padding: 8px 0 !important;           /* 左右 padding 歸零，只留上下點擊高度 */
+  font-size: 16px;                     /* 適合手機閱讀的大小 */
+  color: #000000;
+  text-decoration: none;
+  box-sizing: border-box;
+}
 
-  nav a:hover{
-  text-decoration: none;       /* 移上去時不要出現底線 */
-  color: #0000008f;
+nav a:hover {
+  text-decoration: none;
+  color: #5958588f;
 }
 
   .hero {
