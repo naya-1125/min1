@@ -115,7 +115,7 @@ nav a{
 
 nav a:hover{
 text-decoration: none;       /* 移上去時不要出現底線 */
-  color: #0000008f;
+  color: #5958588f;
 }
 
 /*hero*/
