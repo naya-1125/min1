@@ -103,14 +103,16 @@ nav{
     text-align: right;
 }
 
-nav a{
-    padding: 50px;
-    font-weight: bold;
+nav a {
+  /* 將原本上下左右都是 50px 的 padding，改為垂直 20px、水平由 width 掌控 */
+  padding: 50px 0;
+  width: 140px;            /* 關鍵：給予兩個超連結一模一樣的固定寬度 */
+  text-align: center;      /* 關鍵：文字在自己的 140px 空間內居中對齊 */
+  display: inline-block;   /* 保留你原本的設定，這樣 width 才會生效 */
 
-    /* ▼ 獨立設定 nav 文字顏色與樣式（不影響全域和其他連結） ▼ */
-  color: #000000;             
-  text-decoration: none;       /* 平常無底線 */
-  display: inline-block;       /* 確保 padding 與排版穩定 */
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
 }
 
 nav a:hover{
